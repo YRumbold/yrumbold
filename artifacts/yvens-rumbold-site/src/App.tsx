@@ -15,6 +15,7 @@ const profiles = [
   { label: 'Trusst Lab', href: 'https://www.trusstlab.com/research-lab' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/yvens-rumbold-5994bb50' },
   { label: 'MSU profile', href: 'https://comartsci.msu.edu/our-people/yvens-rumbold' },
+  { label: 'Social Norms Team (Lions Team)', href: 'https://marialapinski.wordpress.com/lapinskis-lions/' },
 ];
 const openSafe = { target: '_blank', rel: 'noopener noreferrer' };
 const assetUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
