@@ -69,7 +69,6 @@ function Home() {
       <div className="bio-copy">
         <p>I am a PhD student at Michigan State University, where I previously earned my master’s degree as a Fulbright Scholar. My research explores social norms, diffusion of innovations, and digital communication across public health and civic life.</p>
         <p>Alongside my academic work, I serve as Executive Director of Policité, a Haiti-based think-and-do tank. I bring extensive local and international communication and development consulting experience to my research and practice.</p>
-        <p>I am a Graduate Teaching Assistant in the Department of Communication at Michigan State University.</p>
         <div className="inline-links"><Link href="/research" className="inline-arrow" data-testid="link-about-research">Read about my research <ArrowRight size={16} /></Link><Link href="/teaching" className="inline-arrow" data-testid="link-about-teaching">See my teaching <ArrowRight size={16} /></Link></div>
       </div>
     </section>
