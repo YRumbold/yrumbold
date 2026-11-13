@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Yvens Rumbold — Academic Website"
+description = "A responsive academic website for Yvens Rumbold, featuring his biography, research, publications, CV, teaching, and contact information."
+version = "1.0.0"
+id = "artifacts/yvens-rumbold-site"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21824
+
+[services.development]
+run = "pnpm --filter @workspace/yvens-rumbold-site run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/yvens-rumbold-site", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/yvens-rumbold-site/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21824"
+BASE_PATH = "/"
