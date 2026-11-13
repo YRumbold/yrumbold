@@ -87,11 +87,11 @@ function Home() {
 }
 
 const reports = [
-  <>Policité &amp; Marijàn. (2026). <i>Corruption and gender inequalities: The experience of Haitian women</i> [Report]. Policité; Marijàn. (Contributor)</>,
-  <>Internews &amp; Policité. (2024). <i>Assessment of citizens’ needs and understanding of the political system in Haiti.</i> Port-au-Prince. (Contributor)</>,
-  <>Internews &amp; Policité. (2022). <i>Rooted in trust 2.0: Information ecosystem assessment.</i> Port-au-Prince. (Coauthored)</>,
-  <>Internews. (2020). <i>Port-au-Prince information ecosystem assessment.</i> Internews Network. (Sole author)</>,
-  <>Dearing, J. W., Lapinski-Lafaive, M., Shin, S. Y., Hussain, S. A., Rumbold, Y., Osoro, R. A., &amp; Shell, D. (2019). <i>A model for introducing global ideas to the U.S.</i> Unpublished report. (Contributor)</>,
+  { title: 'Corruption and gender inequalities: The experience of Haitian women', citation: <>Policité &amp; Marijàn. (2026). <i>Corruption and gender inequalities: The experience of Haitian women</i> [Report]. Policité; Marijàn. (Contributor)</>, href: 'https://www.policite.org/' },
+  { title: 'Assessment of citizens’ needs and understanding of the political system in Haiti', citation: <>Internews &amp; Policité. (2024). <i>Assessment of citizens’ needs and understanding of the political system in Haiti.</i> Port-au-Prince. (Contributor)</>, href: 'https://internews.org/' },
+  { title: 'Rooted in trust 2.0: Information ecosystem assessment', citation: <>Internews &amp; Policité. (2022). <i>Rooted in trust 2.0: Information ecosystem assessment.</i> Port-au-Prince. (Coauthored)</>, href: 'https://internews.org/' },
+  { title: 'Port-au-Prince information ecosystem assessment', citation: <>Internews. (2020). <i>Port-au-Prince information ecosystem assessment.</i> Internews Network. (Sole author)</>, href: 'https://internews.org/' },
+  { title: 'A model for introducing global ideas to the U.S.', citation: <>Dearing, J. W., Lapinski-Lafaive, M., Shin, S. Y., Hussain, S. A., Rumbold, Y., Osoro, R. A., &amp; Shell, D. (2019). <i>A model for introducing global ideas to the U.S.</i> Unpublished report. (Contributor)</>, href: 'https://scholar.google.com/' },
 ];
 const opeds = [
   { title: 'Échec de la transition en Haïti et nouveaux dilemmes : Retour sur l’accord du 3 avril 2024', date: '2025, December 30', href: 'https://ayibopost.com/echec-de-la-transition-en-haiti-et-nouveaux-dilemmes-retour-sur-laccord-du-3-avril-2024/' },
@@ -102,7 +102,9 @@ const opeds = [
 function PublicationGroup({ title, children }: { title: string; children: ReactNode }) {
   return <section className="pub-group"><h3>{title}</h3><div className="pub-list">{children}</div></section>;
 }
-function Pub({ children, testid }: { children: ReactNode; testid: string }) { return <article className="pub-item" data-testid={testid}><span className="pub-mark" aria-hidden="true" /><p>{children}</p></article>; }
+function Pub({ children, testid, href }: { children: ReactNode; testid: string; href?: string }) {
+  return <article className="pub-item" data-testid={testid}><span className="pub-mark" aria-hidden="true" /><p>{children}{href ? <> <a href={href} {...openSafe} className="inline-arrow">Read</a></> : null}</p></article>;
+}
 
 function Research() {
   return <>
@@ -129,11 +131,11 @@ function Research() {
         </div>
       </section>
       <section className="publications"><p className="eyebrow">Selected work</p><h2 className="academic-serif">Publications &amp; writing</h2>
-        <PublicationGroup title="Peer-reviewed research"><Pub testid="pub-peer-reviewed-d4d">Shin, S. Y., Lapinski, M. K., Hussain, S. A., Rumbold, Y., Osoro, R., Shell, D., &amp; Dearing, J. W. (2022). <i>A framework for introducing global health innovations to U.S. communities.</i> <i>Annals of Global Health</i>, 88(1), 84.</Pub></PublicationGroup>
+        <PublicationGroup title="Peer-reviewed research"><Pub testid="pub-peer-reviewed-d4d" href="https://doi.org/10.5334/aogh.3600">Shin, S. Y., Lapinski, M. K., Hussain, S. A., Rumbold, Y., Osoro, R., Shell, D., &amp; Dearing, J. W. (2022). <i>A framework for introducing global health innovations to U.S. communities.</i> <i>Annals of Global Health</i>, 88(1), 84.</Pub></PublicationGroup>
         <PublicationGroup title="Theses"><Pub testid="pub-thesis-ma">Rumbold, Y. (2019). <i>Reinvention and adaptation into U.S. communities of five global health innovations</i> [Master’s thesis]. Michigan State University.</Pub></PublicationGroup>
-        <PublicationGroup title="Technical reports & policy publications">{reports.map((r, i) => <Pub key={i} testid={`pub-report-${i + 1}`}>{r}</Pub>)}</PublicationGroup>
+        <PublicationGroup title="Technical reports & policy publications">{reports.map((report, i) => <Pub key={i} testid={`pub-report-${i + 1}`} href={report.href}>{report.citation}</Pub>)}</PublicationGroup>
         <PublicationGroup title="Book & literary contributions"><Pub testid="pub-book-2011">Brutus, F., Rumbold, Y., et al. (2011). <i>Les cent jours de Martelly.</i> Port-au-Prince: C3 Éditions.</Pub></PublicationGroup>
-        <PublicationGroup title="Public scholarship & op-eds">{opeds.map((item, i) => <Pub key={item.title} testid={`pub-op-ed-${i + 1}`}>Rumbold, Y. ({item.date}). <i>{item.title}.</i> Ayibopost.</Pub>)}</PublicationGroup>
+        <PublicationGroup title="Public scholarship & op-eds">{opeds.map((article, i) => <Pub key={article.title} testid={`pub-op-ed-${i + 1}`} href={article.href}>Rumbold, Y. ({article.date}). <i>{article.title}.</i> Ayibopost.</Pub>)}</PublicationGroup>
         <PublicationGroup title="Selected journalism · French"><Pub testid="pub-journalism-1">Rumbold, Y. (2013, April 27). “Fin du colloque international Aimé Césaire à Dakar.” <i>Le Nouvelliste.</i></Pub></PublicationGroup>
       </section>
       <section className="conference-section"><p className="eyebrow">2026 conference work</p><h2 className="academic-serif">Presentations &amp; submissions</h2><div className="conference-list">
