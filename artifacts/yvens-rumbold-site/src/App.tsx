@@ -151,9 +151,7 @@ function CV() {
     <PageIntro eyebrow="Curriculum vitae" title="A record of the work." description="Research, teaching, and applied communication work across academic and public-interest settings." />
     <div className="content-width cv-page">
       <div className="download-panel"><div><p className="eyebrow">Full curriculum vitae</p><h2 className="academic-serif">Yvens Rumbold</h2><p>Download the PDF, or open it in a new tab if your browser supports it.</p></div><div className="cv-actions"><a href={assetUrl('assets/yvens-rumbold-cv.pdf')} {...openSafe} className="inline-arrow" data-testid="link-cv-open">Open in new tab <ArrowUpRight size={15} /></a><a href={assetUrl('assets/yvens-rumbold-cv.pdf')} download className="inline-arrow" data-testid="link-cv-download">Download PDF <ArrowDownToLine size={15} /></a></div></div>
-      <div className="pdf-frame">
-        <p className="viewer-fallback">The PDF preview has been removed from this page. <a href={assetUrl('assets/yvens-rumbold-cv.pdf')} {...openSafe}>Open the full CV</a> to view the complete document.</p>
-      </div>
+      <div className="pdf-frame"><object data={`${assetUrl('assets/yvens-rumbold-cv.pdf')}#view=FitH`} type="application/pdf" aria-label="Embedded Yvens Rumbold curriculum vitae PDF" data-testid="object-cv-pdf"><p className="viewer-fallback">Your browser can’t display the embedded PDF. <a href={assetUrl('assets/yvens-rumbold-cv.pdf')} {...openSafe}>Open the full CV</a> instead.</p></object></div>
       <section className="cv-selected"><p className="eyebrow">Selected work at a glance</p><div className="cv-facts"><div><span>2022</span><p>Peer-reviewed article on global health innovation diffusion in U.S. communities.</p></div><div><span>2024</span><p>Applied public-interest research and policy work in Haiti and transnational information ecosystems.</p></div><div><span>2026</span><p>Research presentations on digital media, moral framing, and institutional communication.</p></div></div></section>
     </div>
   </>;
