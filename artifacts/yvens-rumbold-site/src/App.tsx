@@ -17,9 +17,12 @@ const profiles = [
   { label: 'MSU profile', href: 'https://comartsci.msu.edu/our-people/yvens-rumbold' },
 ];
 const openSafe = { target: '_blank', rel: 'noopener noreferrer' };
+const assetUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`;
+const normalizeRoute = (path: string) => path.length > 1 ? path.replace(/\/+$/, '') : '/';
 
 function SiteShell({ children }: { children: ReactNode }) {
   const [location] = useLocation();
+  const currentRoute = normalizeRoute(location);
   const [menuOpen, setMenuOpen] = useState(false);
   useEffect(() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'instant' }); }, [location]);
   return <div className="site-wrap">
@@ -33,7 +36,7 @@ function SiteShell({ children }: { children: ReactNode }) {
           {menuOpen ? <X size={21} /> : <Menu size={21} />}
         </button>
         <nav className={`nav-items ${menuOpen ? 'is-open' : ''}`} aria-label="Main navigation">
-          {navItems.map(item => <Link key={item.href} href={item.href} aria-current={location === item.href ? 'page' : undefined} className="nav-link" data-testid={`link-nav-${item.label.toLowerCase()}`}>{item.label}</Link>)}
+          {navItems.map(item => <Link key={item.href} href={item.href} aria-current={currentRoute === item.href ? 'page' : undefined} className="nav-link" data-testid={`link-nav-${item.label.toLowerCase()}`}>{item.label}</Link>)}
         </nav>
       </div>
     </header>
@@ -56,9 +59,9 @@ function Home() {
         <h1 className="academic-serif">How ideas move.<br /><em>How people make sense.</em></h1>
         <p className="hero-lede">I’m Yvens Rumbold, a communication scholar studying how social norms, media, and new ideas shape trust and behavior in digital environments.</p>
         <p className="affiliation">Third-year PhD student in Communication<br />Michigan State University</p>
-        <div className="hero-actions"><Link href="/research" className="btn-primary" data-testid="button-home-research">Explore my research <ArrowRight size={17} /></Link><Link href="/cv" className="text-link" data-testid="link-home-cv">View curriculum vitae <ArrowUpRight size={16} /></Link><a href="/assets/yvens-rumbold-cv.pdf" download="Yvens-Rumbold-CV.pdf" className="btn-outline" data-testid="button-download-cv-home"><ArrowDownToLine size={16} /> Download CV</a></div>
+        <div className="hero-actions"><Link href="/research" className="btn-primary" data-testid="button-home-research">Explore my research <ArrowRight size={17} /></Link><Link href="/cv" className="text-link" data-testid="link-home-cv">View curriculum vitae <ArrowUpRight size={16} /></Link><a href={assetUrl('assets/yvens-rumbold-cv.pdf')} download="Yvens-Rumbold-CV.pdf" className="btn-outline" data-testid="button-download-cv-home"><ArrowDownToLine size={16} /> Download CV</a></div>
       </div>
-      <div className="hero-portrait-wrap"><div className="portrait-accent" /><img className="hero-portrait" src="/assets/profile-photo.jpg" alt="Portrait of Yvens Rumbold" width={1024} height={1024} data-testid="img-profile-photo" /><div className="portrait-note"><span>Researcher</span><span>Educator</span><span>Communication</span></div></div>
+      <div className="hero-portrait-wrap"><div className="portrait-accent" /><img className="hero-portrait" src={assetUrl('assets/profile-photo.jpg')} alt="Portrait of Yvens Rumbold" width={1024} height={1024} data-testid="img-profile-photo" /><div className="portrait-note"><span>Researcher</span><span>Educator</span><span>Communication</span></div></div>
     </section>
     <section className="about-content content-width">
       <div className="section-heading"><p className="eyebrow">About</p><h2 className="academic-serif">A communication scholar<br />working across contexts.</h2></div>
@@ -109,7 +112,7 @@ function Research() {
     <div className="content-width research-page">
       <section className="research-question"><div className="rq-label"><span>Featured study</span><span>01 / 2022</span></div><h2 className="academic-serif">A Framework for Introducing Global Health Innovations to the US</h2>
         <p className="citation">Shin, S. Y., Lapinski, M. K., Hussain, S. A., Rumbold, Y., Osoro, R., Shell, D., &amp; Dearing, J. W. (2022). “A framework for introducing global health innovations to the US.” <i>Annals of Global Health, 88</i>(1), Article 67.</p>
-        <div className="study-links"><a href="https://doi.org/10.5334/aogh.3600" {...openSafe} className="inline-arrow" data-testid="link-featured-doi">View article at DOI <ArrowUpRight size={15} /></a><a href="/assets/featured-study.pdf" {...openSafe} className="inline-arrow" data-testid="link-featured-pdf">Open the paper PDF <ArrowUpRight size={15} /></a></div>
+        <div className="study-links"><a href="https://doi.org/10.5334/aogh.3600" {...openSafe} className="inline-arrow" data-testid="link-featured-doi">View article at DOI <ArrowUpRight size={15} /></a><a href={assetUrl('assets/featured-study.pdf')} {...openSafe} className="inline-arrow" data-testid="link-featured-pdf">Open the paper PDF <ArrowUpRight size={15} /></a></div>
       </section>
       <section className="study-story">
         <div className="study-body">
@@ -118,7 +121,7 @@ function Research() {
           <div className="study-block"><p className="eyebrow">How it was done</p><p>Archival research and five selected case studies: Ciclovía (Colombia), ConsejoSano (Mexico), Cardiff Violence Prevention Model (Wales), Swedish Rheumatology Quality Registry (Sweden), and AgeWell Global (South Africa). During 2018, the team conducted 27 semi-structured interviews with 42 interviewees (leaders and stakeholders), followed by thematic analysis.</p></div>
           <div className="study-block"><p className="eyebrow">What emerged</p><p>Six factors were important across the cases: innovation attributes, linking agents, inter-organizational partnerships, scale-up strategies, implementation processes and outcomes in US communities, and policy/social context. Benefit-cost assessment and compatibility were consistently valued. Stigma about foreign origin was not an important barrier in these cases; origin could be positive.</p></div>
         </div>
-        <figure className="framework-figure"><img src="/assets/featured-figure.jpg" alt="Designing for Diffusion framework: global ideas move through linking agents and partnerships, guided by scale-up strategies and context, toward U.S. adopting communities. A table lists attributes and implementation considerations." width={1024} height={1024} loading="lazy" data-testid="img-featured-framework" /><a className="figure-open" href="/assets/featured-figure.jpg" {...openSafe} data-testid="link-featured-figure-full-size">Open the figure full size</a><figcaption>Figure 2 Designing for Diffusion (D4D) Framework for Global Health Innovations.</figcaption><p className="plain-language"><strong>In plain language:</strong> moving an idea into a new community takes more than the idea itself. Its attributes, the people and organizations that connect partners, plans for scaling, the way implementation unfolds, and the surrounding policy and social context all work together.</p></figure>
+        <figure className="framework-figure"><img src={assetUrl('assets/featured-figure.jpg')} alt="Designing for Diffusion framework: global ideas move through linking agents and partnerships, guided by scale-up strategies and context, toward U.S. adopting communities. A table lists attributes and implementation considerations." width={1024} height={1024} loading="lazy" data-testid="img-featured-framework" /><a className="figure-open" href={assetUrl('assets/featured-figure.jpg')} {...openSafe} data-testid="link-featured-figure-full-size">Open the figure full size</a><figcaption>Figure 2 Designing for Diffusion (D4D) Framework for Global Health Innovations.</figcaption><p className="plain-language"><strong>In plain language:</strong> moving an idea into a new community takes more than the idea itself. Its attributes, the people and organizations that connect partners, plans for scaling, the way implementation unfolds, and the surrounding policy and social context all work together.</p></figure>
       </section>
       <section className="implication-callout"><p className="eyebrow">Why it matters</p><p>The framework can help public-health decision makers assess, adapt, partner around, implement, and sustain global innovations. These case studies inform a framework; they do not establish causal proof or claim that every innovation will transfer in the same way.</p></section>
       <section className="research-themes" aria-labelledby="research-themes-heading">
@@ -152,8 +155,8 @@ function CV() {
   return <>
     <PageIntro eyebrow="Curriculum vitae" title="A record of the work." description="Research, teaching, and applied communication work across academic and public-interest settings." />
     <div className="content-width cv-page">
-      <div className="download-panel"><div><p className="eyebrow">Full curriculum vitae</p><h2 className="academic-serif">Yvens Rumbold</h2><p>Download the PDF, or open it in a new tab if your browser does not display the embedded viewer.</p></div><div className="cv-actions"><a className="btn-primary" href="/assets/yvens-rumbold-cv.pdf" download="Yvens-Rumbold-CV.pdf" data-testid="button-download-cv"><ArrowDownToLine size={17} /> Download CV</a><a className="inline-arrow" href="/assets/yvens-rumbold-cv.pdf" {...openSafe} data-testid="link-open-cv">Open PDF in new tab <ArrowUpRight size={15} /></a></div></div>
-      <div className="pdf-frame"><object data="/assets/yvens-rumbold-cv.pdf#view=FitH" type="application/pdf" aria-label="Embedded Yvens Rumbold curriculum vitae PDF" data-testid="viewer-cv"><p>Your browser cannot display the embedded PDF. <a href="/assets/yvens-rumbold-cv.pdf" {...openSafe} data-testid="link-cv-fallback">Open the CV in a new tab</a> or download it above.</p></object><div className="viewer-fallback">PDF not appearing? <a href="/assets/yvens-rumbold-cv.pdf" {...openSafe} data-testid="link-cv-viewer-fallback">Open CV in a new tab</a>.</div></div>
+      <div className="download-panel"><div><p className="eyebrow">Full curriculum vitae</p><h2 className="academic-serif">Yvens Rumbold</h2><p>Download the PDF, or open it in a new tab if your browser does not display the embedded viewer.</p></div><div className="cv-actions"><a className="btn-primary" href={assetUrl('assets/yvens-rumbold-cv.pdf')} download="Yvens-Rumbold-CV.pdf" data-testid="button-download-cv"><ArrowDownToLine size={17} /> Download CV</a><a className="inline-arrow" href={assetUrl('assets/yvens-rumbold-cv.pdf')} {...openSafe} data-testid="link-open-cv">Open PDF in new tab <ArrowUpRight size={15} /></a></div></div>
+      <div className="pdf-frame"><object data={`${assetUrl('assets/yvens-rumbold-cv.pdf')}#view=FitH`} type="application/pdf" aria-label="Embedded Yvens Rumbold curriculum vitae PDF" data-testid="viewer-cv"><p>Your browser cannot display the embedded PDF. <a href={assetUrl('assets/yvens-rumbold-cv.pdf')} {...openSafe} data-testid="link-cv-fallback">Open the CV in a new tab</a> or download it above.</p></object><div className="viewer-fallback">PDF not appearing? <a href={assetUrl('assets/yvens-rumbold-cv.pdf')} {...openSafe} data-testid="link-cv-viewer-fallback">Open CV in a new tab</a>.</div></div>
       <section className="cv-selected"><p className="eyebrow">Selected work at a glance</p><div className="cv-facts"><div><span>2022</span><p>Peer-reviewed article on global health innovation diffusion</p></div><div><span>2020–24</span><p>Development Manager, FOKAL</p></div><div><span>2024–present</span><p>Executive Director, Policité</p></div></div></section>
     </div>
   </>;
@@ -197,8 +200,9 @@ const metadata: Record<string, { title: string; description: string }> = {
 };
 function Router() {
   const [location] = useLocation();
+  const currentRoute = normalizeRoute(location);
   useEffect(() => {
-    const page = metadata[location] ?? { title: 'Page not found | Yvens Rumbold', description: 'The requested page could not be found.' };
+    const page = metadata[currentRoute] ?? { title: 'Page not found | Yvens Rumbold', description: 'The requested page could not be found.' };
     document.title = page.title;
     const setMeta = (attribute: 'name' | 'property', key: string, content: string) => {
       let tag = document.head.querySelector<HTMLMetaElement>(`meta[${attribute}="${key}"]`);
@@ -212,20 +216,23 @@ function Router() {
     setMeta('name', 'description', page.description);
     setMeta('property', 'og:title', page.title);
     setMeta('property', 'og:description', page.description);
-    setMeta('property', 'og:url', `${window.location.origin}${location}`);
-    setMeta('property', 'og:image', `${window.location.origin}/assets/profile-photo.jpg`);
+    const siteBase = new URL(import.meta.env.BASE_URL, window.location.origin);
+    const pageUrl = new URL(currentRoute === '/' ? '' : currentRoute.replace(/^\/+/, ''), siteBase).href;
+    const profileUrl = new URL(assetUrl('assets/profile-photo.jpg'), window.location.origin).href;
+    setMeta('property', 'og:url', pageUrl);
+    setMeta('property', 'og:image', profileUrl);
     setMeta('name', 'twitter:title', page.title);
     setMeta('name', 'twitter:description', page.description);
-    setMeta('name', 'twitter:image', `${window.location.origin}/assets/profile-photo.jpg`);
+    setMeta('name', 'twitter:image', profileUrl);
     let canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {
       canonical = document.createElement('link');
       canonical.rel = 'canonical';
       document.head.append(canonical);
     }
-    canonical.href = `${window.location.origin}${location}`;
-  }, [location]);
-  return <SiteShell><Switch><Route path="/" component={Home} /><Route path="/research" component={Research} /><Route path="/cv" component={CV} /><Route path="/contact" component={Contact} /><Route path="/teaching" component={Teaching} /><Route component={NotFound} /></Switch></SiteShell>;
+    canonical.href = pageUrl;
+  }, [currentRoute]);
+  return <SiteShell><Switch location={currentRoute}><Route path="/" component={Home} /><Route path="/research" component={Research} /><Route path="/cv" component={CV} /><Route path="/contact" component={Contact} /><Route path="/teaching" component={Teaching} /><Route component={NotFound} /></Switch></SiteShell>;
 }
 
 function App() {
