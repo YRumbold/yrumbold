@@ -103,7 +103,7 @@ function PublicationGroup({ title, children }: { title: string; children: ReactN
   return <section className="pub-group"><h3>{title}</h3><div className="pub-list">{children}</div></section>;
 }
 function Pub({ children, testid, href }: { children: ReactNode; testid: string; href?: string }) {
-  return <article className="pub-item" data-testid={testid}><span className="pub-mark" aria-hidden="true" /><p>{children}{href ? <> <a href={href} {...openSafe} className="inline-arrow">Read</a></> : null}</p></article>;
+  return <article className="pub-item" data-testid={testid}><span className="pub-mark" aria-hidden="true" /><p>{children}{href ? <> <a href={href} {...openSafe} className="inline-arrow">View</a></> : null}</p></article>;
 }
 
 function Research() {
@@ -132,7 +132,7 @@ function Research() {
       </section>
       <section className="publications"><p className="eyebrow">Selected work</p><h2 className="academic-serif">Publications &amp; writing</h2>
         <PublicationGroup title="Peer-reviewed research"><Pub testid="pub-peer-reviewed-d4d" href="https://doi.org/10.5334/aogh.3600">Shin, S. Y., Lapinski, M. K., Hussain, S. A., Rumbold, Y., Osoro, R., Shell, D., &amp; Dearing, J. W. (2022). <i>A framework for introducing global health innovations to U.S. communities.</i> <i>Annals of Global Health</i>, 88(1), 84.</Pub></PublicationGroup>
-        <PublicationGroup title="Theses"><Pub testid="pub-thesis-ma">Rumbold, Y. (2019). <i>Reinvention and adaptation into U.S. communities of five global health innovations</i> [Master’s thesis]. Michigan State University.</Pub></PublicationGroup>
+        <PublicationGroup title="Theses"><Pub testid="pub-thesis-ma" href="https://d.lib.msu.edu/etd">Rumbold, Y. (2019). <i>Reinvention and adaptation into U.S. communities of five global health innovations</i> [Master’s thesis]. Michigan State University.</Pub></PublicationGroup>
         <PublicationGroup title="Technical reports & policy publications">{reports.map((report, i) => <Pub key={i} testid={`pub-report-${i + 1}`} href={report.href}>{report.citation}</Pub>)}</PublicationGroup>
         <PublicationGroup title="Book & literary contributions"><Pub testid="pub-book-2011">Brutus, F., Rumbold, Y., et al. (2011). <i>Les cent jours de Martelly.</i> Port-au-Prince: C3 Éditions.</Pub></PublicationGroup>
         <PublicationGroup title="Public scholarship & op-eds">{opeds.map((article, i) => <Pub key={article.title} testid={`pub-op-ed-${i + 1}`} href={article.href}>Rumbold, Y. ({article.date}). <i>{article.title}.</i> Ayibopost.</Pub>)}</PublicationGroup>
@@ -140,7 +140,7 @@ function Research() {
       </section>
       <section className="conference-section"><p className="eyebrow">2026 conference work</p><h2 className="academic-serif">Presentations &amp; submissions</h2><div className="conference-list">
         <article><span>ICA · Cape Town, South Africa</span><h3>Research escalator: Modeling Audience Responses to Moral Disengagement on TikTok: Mechanisms, Frames, and Injunctive Norms</h3><p>7–11 May 2026.</p></article>
-        <article><span>Moral Media Conference · Gainesville, Florida</span><h3>The virality curse: Platform incentives and the amplification of Haitian gangs’ moral justifications on YouTube</h3><p>June 2026.</p></article>
+        <article><span>Moral Media Conference · Gainesville, Florida</span><h3>Poster Presentation | The virality curse: Platform incentives and the amplification of Haitian gangs’ moral justifications on YouTube</h3><p>June 2026.</p></article>
         <article><span>NCA · New Orleans, United States</span><h3>Research Escalator: Movements of Influence: A Network Analysis of Persuasive Messaging and Networked Authority Among Gang-Affiliated Narratives</h3><p>November 2026.</p></article>
         <article><span>NCA · New Orleans, United States</span><h3>Research Escalator: Adoption Intentions of NLP Translation Tools: Trust and Patient Satisfaction Among NELP Communities</h3><p>November 2026.</p></article>
       </div></section>
